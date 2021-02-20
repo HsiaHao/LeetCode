@@ -37,7 +37,62 @@ class Solution:
         return res
 ```
 
+**Note: The key parameter in sorted can choose the factor for sorting**. 
+
 ---
+
+### 2. #121 Best Time To Buy and Sell Stock
+**Description**
+You are given an array prices where prices[i] is the price of a given stock on the ith day.
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+**Example**
+Input: prices = [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+
+**Key Points:**
+- Greedy Algorithm
+    - for loop throght every price in prices
+    - if find a lower price, update lowerest_price
+    - else count the diff (current_price) - (lowerst_price)
+    - when finish, get the biggest diff
+ - Ideas
+    - only update lowerst without cosidering the prvious case
+    - since if there is a lowest price, it is better to buy the current price than the previous one
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        min_p = 100000
+        res = 0
+        for p in prices:
+            if (p-min_p)<=0:
+                min_p = p
+            else:
+                x = p - min_p
+                if x>res:
+                    res = x
+        return res
+```
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
