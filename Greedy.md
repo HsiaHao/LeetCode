@@ -16,12 +16,12 @@ Reconstruct and return the queue that is represented by the input array people. 
 
 **Key Point**
 - Greedy Algorithm
-    - sort height -> short to high h
+    - sort height -> short to high (h)
     - if people have same height-> sort by k
 - After sorting
     - insert the people in a list by k
     - the higher person will be inserted first
-    - then, when insert short people in the list will not influence higher people
+    - then, inserting short people in the list will not influence higher people
 ```python
 class Solution:
     def take_second(elem):
