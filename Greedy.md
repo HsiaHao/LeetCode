@@ -77,6 +77,45 @@ class Solution:
         return res
 ```
 ---
+### 3. #121 Best Time to Buy and Sell Stock II (Easy)
+**Description**
+You are given an array prices for which the ith element is the price of a given stock on day i.
+
+Find the maximum profit you can achieve. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).
+
+Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+
+
+**Example**
+Input: prices = [7,1,5,3,6,4]
+Output: 7
+Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+**Key Points:**
+- Greedy Algorithm
+    - for loop through all the prices:
+    - if the current price is smaller than the current_min: add the diff to the answer
+    - else update the curr_min
+    - return res
+ - Ideas
+    - sell when selling can earn
+    - It will be optimal since you can buy that again (update the min_curr)
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        res = 0
+        last = prices[0]
+        for p in prices:
+            if p - last >0:
+                res+=(p-last)
+                last = p
+            else:
+                last = p
+        return res
+```
+---
+
+
 
 
 
