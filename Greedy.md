@@ -114,8 +114,144 @@ class Solution:
         return res
 ```
 ---
+### 4. #605. Can Place Flowers
+**Description**
+You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in adjacent plots.
+
+Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule.
 
 
+**Example**
+Input: flowerbed = [1,0,0,0,1], n = 1
+Output: true
+
+Input: flowerbed = [1,0,0,0,1], n = 2
+Output: false
+**Key Points:**
+- Ideas: 
+    - Iterate through all points
+    - Let p be the point we are currently checking
+    - if the two point before and after p are 0: set p=1
+    - count the maximum places can be planted
+    - if cnt>n: return True
+```python
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        if len(flowerbed)==1:
+            if flowerbed[0]==0:
+                return n<=1
+            else:
+                return n==0
+        pre = 0
+        cnt=0
+        i=0
+        for i in range(0,len(flowerbed)-1):
+            if pre==0 and flowerbed[i]==0 and flowerbed[i+1]==0:
+                cnt +=1
+                flowerbed[i]=1
+                print(i, 'valid')
+            pre = flowerbed[i]
+        if pre==0 and flowerbed[i+1]==0:
+            cnt+=1
+        return cnt>=n
+```
+### 5. #392. Is Subsequence
+**Description**
+Given two strings s and t, check if s is a subsequence of t.
+
+A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+
+
+**Example**
+Input: s = "abc", t = "ahbgdc"
+Output: true
+Input: s = "axc", t = "ahbgdc"
+Output: false
+**Key Points:**
+- Ideas: 
+    - compare all the characteristic and move the index of s
+    - util the index of s == len(s)
+```python
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        if len(s)==0: return True
+        i=0
+        for c in t:
+            if c==s[i]:
+                i+=1
+            if i==len(s):
+                return True
+        return False
+ 
+```
+### 6. #665. None Decreasing Array
+**Description**
+
+
+
+**Example**
+
+**Key Points:**
+- there are two possible condition
+- Case 1: 1,7,3,4
+    - 7->3 is wrong
+    - we need to change 7->1
+- Case 2: 4,7,3,9
+    - 7->3 is wrong
+    - we cannot change 7->1
+    - we can only change 3->7
+- for case1, nums[i+1], whech is 3, is bigger that nums[i-1]
+    - we want the numsber be as small as possible
+    - we can change nums[i] to nums[i+1]-> makes it smaller but it is also bigger than nums[i-1]
+- for case2, nums[i+1] is less than nums[i-1]
+    - we cannot set nums[i] = nums[i+1], since it will make nums[i] smaller than nums[i-1]
+    - Thus, we can only set nums[i+1] = nums[i]
+```python
+class Solution:
+    def checkPossibility(self, nums: List[int]) -> bool:
+        check = 0
+        for i in range(len(nums)-1):
+            if nums[i]>nums[i+1]:
+                if i==0:
+                    pre = 0
+                else:
+                    pre = nums[i-1]
+                if check==0:
+                    if pre>nums[i+1]:
+                        nums[i+1] = nums[i]
+                    else:
+                        nums[i] = nums[i+1]
+                    check=1
+                else:
+                    return False
+        return True
+                
+        
+ 
+```
+### 6. #665. None Decreasing Array
+**Description**
+
+
+
+**Example**
+
+**Key Points:**
+
+```python
+
+ 
+```
+### 6. #665. None Decreasing Array
+**Description**
+
+
+
+**Example**
+
+**Key Points:**
+
+```python
 
 
 
