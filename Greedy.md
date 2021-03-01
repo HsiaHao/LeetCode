@@ -242,16 +242,82 @@ class Solution:
 
  
 ```
+### 6. #52. Maximum Subarray (Easy)
+**Description**
+Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+**Example**
+Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Output: 6
+Explanation: [4,-1,2,1] has the largest sum = 6.
+
+**Key Points:**
+- Dyanamic programming
+    - if the total of previous <0:
+        - ababdon it and pre = nums[i]
+    - else:
+        - it can make the current status bigger
+        - add it!
+```python
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        pre = nums[0]
+        l = [pre]
+        for i in range(1, len(nums)):
+            if pre>0:
+                pre += nums[i]
+            else:
+                pre = nums[i]
+            l.append(pre)
+        return max(l)
+                
+```
+---
+### 6. #763. Partition Labels
+**Description**
+A string S of lowercase English letters is given. We want to partition this string into as many parts as possible so that each letter appears in at most one part, and return a list of integers representing the size of these parts.
+
+
+**Example**
+Input: S = "ababcbacadefegdehijhklij"
+Output: [9,7,8]
+Explanation:
+The partition is "ababcbaca", "defegde", "hijhklij".
+This is a partition so that each letter appears in at most one part.
+A partition like "ababcbacadefegde", "hijhklij" is incorrect, because it splits S into less parts.
+**Key Points:**
+- Greedy Algorithm
+    - store the farest value of each character in a dictionary
+    - update farest length of the partition label by checking the dictionary
+    - if reach the farest index, append the value to a list and find the other partition label.
+```python
+class Solution:
+    def partitionLabels(self, S: str) -> List[int]:
+        dic = {}
+        # record the last position for every char
+        for i in range(len(S)):
+            dic[S[i]] = i
+        l = []
+        max_len = 0
+        last=-1 # Note: the first length of the label need to be added one
+        for i in range(len(S)):
+            if dic[S[i]]>max_len:
+                max_len = dic[S[i]]
+            if i==max_len:
+                print(i, last)
+                l.append(max_len-last)
+                last = max_len
+                max_len=0
+        
+        return l
+```
 ### 6. #665. None Decreasing Array
 **Description**
-
-
-
 **Example**
 
 **Key Points:**
 
 ```python
+```
 
 
 
